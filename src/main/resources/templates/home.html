@@ -1,0 +1,19 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}" lang="en">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="p-5 text-center bg-body-secondary rounded-3">
+        <h1 class="display-4">Welcome to the Demo Project</h1>
+        <p class="lead">This project showcases pagination using Spring Boot, Thymeleaf, and Bootstrap 5</p>
+        <hr class="my-4">
+        <p>Click the button below to view the list of users with pagination.</p>
+        <a class="btn btn-primary btn-lg" th:href="@{/users}" role="button">View Users</a>
+    </div>
+</div>
+</body>
+</html>
