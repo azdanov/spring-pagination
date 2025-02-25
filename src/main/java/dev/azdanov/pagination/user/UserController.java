@@ -16,12 +16,16 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
+    public String mainPageUsers(){
+        return "users";
+    }
+    @GetMapping("/list")
     public String listUsers(Pageable pageable, Model model) {
         PagedModel<UserDto> users = userService.getUsers(pageable);
 
         model.addAttribute("users", users);
         model.addAttribute("pageable", pageable);
 
-        return "users";
+        return "fragments/users/list :: list";
     }
 }
