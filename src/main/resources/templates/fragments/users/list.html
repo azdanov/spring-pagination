@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<div id="users" th:fragment="list">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th th:replace="~{fragments/sorting :: sorting('id','ID',${users}, ${pageable},'#users')}">ID</th>
+                <th th:replace="~{fragments/sorting :: sorting('name','Name',${users}, ${pageable},'#users')}">Name</th>
+                <th th:replace="~{fragments/sorting :: sorting('email','Email',${users}, ${pageable},'#users')}">Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users.content}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.email}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="~{fragments/pagination :: offset-pagination(${users}, ${pageable}, '#users')}"></div>
+</div>
