@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Sorting</title>
+</head>
+<body>
+<th scope="col"
+    th:fragment="sorting(field, label, pagedModel, pageable, targetDivId)"
+    th:with="page=${pagedModel.getMetadata()}"
+>
+  <span th:if="${pagedModel.getContent().isEmpty()}">[[${label}]]</span>
+  <a href="#"
+     th:if="${pageable.getSort().isUnsorted() || pageable.getSort().getOrderFor(field) == null}"
+     th:with="currentPage = ${page.number}"
+     hx:get="@{${currentUrl}(page=0, size=${pageable.pageSize}, sort=${field + ',asc'})}"
+     hx:target="${targetDivId}">
+    [[${label}]]</a>
+  <a href="#"
+     th:if="${pageable.getSort().isSorted() && pageable.getSort().getOrderFor(field) !=null}"
+     th:with="currentPage = ${page.number}, order=${pageable.getSort().getOrderFor(field)}"
+     hx:get="@{${currentUrl}(page=0, size=${pageable.pageSize}, sort=${field + ','+order.reverse().getDirection()})}"
+     hx:target="${targetDivId}">[[${label}]] <i th:class="${order.isAscending() ? 'bi bi-sort-down-alt' : 'bi bi-sort-down'}"></i>
+  </a>
+</th>
+
+</body>
+</html>
